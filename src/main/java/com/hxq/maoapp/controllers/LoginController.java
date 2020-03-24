@@ -85,5 +85,24 @@ public class LoginController {
         }
         return res;
     }
+
+    @GetMapping("/getandroidphonenumberisonly")
+    @ResponseBody
+    public Result phoneNumberIsOnly(@RequestParam("phoneNumber")String phoneNumber){
+
+        Result res = new Result();
+        Optional<User> userOptional=userRepostory.findByPhoneNumber(phoneNumber);
+        if (userOptional.isPresent()){
+                res.setMessage("验证成功，手机号码第一次使用");
+                res.setStatus(200);
+
+
+        }else {
+            res.setStatus(204);
+            res.setMessage("手机号已被注册");
+
+        }
+        return res;
+    }
 }
 

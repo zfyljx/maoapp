@@ -15,9 +15,12 @@ import com.hxq.maoapp.repository.UserRepostory;
 import com.hxq.maoapp.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Optional;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -52,6 +55,25 @@ public class RegisterController {
         }else {
             res.setMessage("注册失败");
             res.setStatus(204);
+        }
+        return res;
+    }
+
+    @GetMapping("/getandroidusernameisonly")
+    @ResponseBody
+    public Result userNameIsOnly(@RequestParam("userName")String userName){
+
+        Result res = new Result();
+        Optional<User> userOptional=userRepostory.findByUserName(userName);
+        if (userOptional.isPresent()){
+            res.setMessage("验证成功，用户名第一次使用");
+            res.setStatus(200);
+
+
+        }else {
+            res.setStatus(204);
+            res.setMessage("用户名已被注册");
+
         }
         return res;
     }
