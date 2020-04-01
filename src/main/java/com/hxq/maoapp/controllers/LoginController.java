@@ -92,7 +92,7 @@ public class LoginController {
 
         Result res = new Result();
         Optional<User> userOptional=userRepostory.findByPhoneNumber(phoneNumber);
-        if (userOptional.isPresent()){
+        if (!userOptional.isPresent()){
                 res.setMessage("验证成功，手机号码第一次使用");
                 res.setStatus(200);
 

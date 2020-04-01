@@ -65,7 +65,7 @@ public class RegisterController {
 
         Result res = new Result();
         Optional<User> userOptional=userRepostory.findByUserName(userName);
-        if (userOptional.isPresent()){
+        if (!userOptional.isPresent()){
             res.setMessage("验证成功，用户名第一次使用");
             res.setStatus(200);
 
