@@ -10,7 +10,6 @@
  */
 package com.hxq.maoapp.controllers;
 
-import cn.hutool.core.util.IdUtil;
 import com.hxq.maoapp.utils.Result;
 import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,7 +47,7 @@ public class QiniuController {
         Auth auth = Auth.create(accessKey, secretKey);
         HashMap<String, String> object = new HashMap<>();
         object.put("token", auth.uploadToken(bucket));
-        object.put("uuid", IdUtil.simpleUUID());
+//        object.put("uuid", IdUtil.simpleUUID());
 
         return new Result(200, "获取token成功", object);
     }
