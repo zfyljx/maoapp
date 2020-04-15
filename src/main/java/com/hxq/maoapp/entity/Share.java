@@ -38,6 +38,7 @@ public class Share {
 
 
     private Long userId;
+    private String userName;
     private String message;
     private String address;
 
@@ -48,6 +49,14 @@ public class Share {
     private String imageThreeUrl;
 
     private Date creatTime;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public Long getId() {
         return id;
@@ -118,6 +127,7 @@ public class Share {
         return "Share{" +
                 "id=" + id +
                 ", userId=" + userId +
+                ", userName='" + userName + '\'' +
                 ", message='" + message + '\'' +
                 ", address='" + address + '\'' +
                 ", imageOneUrl='" + imageOneUrl + '\'' +

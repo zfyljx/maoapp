@@ -42,6 +42,7 @@ public class ShareController {
     @PostMapping("/postandroidsaveshare")
     @ResponseBody
     public Result saveShare(@RequestParam("id")Long userId,
+                            @RequestParam("userName")String userName,
                            @RequestParam("message")String message,
                            @RequestParam("address")String address,
                            @RequestParam("imageOne")String imageOne,
@@ -50,6 +51,7 @@ public class ShareController {
         Result res=new Result();
         Share share=new Share();
         share.setAddress(address);
+        share.setUserName(userName);
         share.setUserId(userId);
         share.setImageOneUrl(imageOne);
         share.setMessage(message);
