@@ -14,12 +14,11 @@ import com.hxq.maoapp.utils.Result;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,7 +35,7 @@ import java.util.HashMap;
  * @create 2020/4/6
  * @since 1.0.0
  */
-@Repository
+@Controller
 public class CommonController {
 
     @Value("${amap.key}")
@@ -46,14 +45,15 @@ public class CommonController {
     @ResponseBody
     @GetMapping(value = "/getandroidaddressdetail" )
     public Result findAddressByLat(@RequestParam(value = "latitude" ,required = false) String lat,
-                                   @RequestParam(value = "longitude" ,required = false) String lng,
-                                   HttpServletRequest request) throws IOException {
+                                   @RequestParam(value = "longitude" ,required = false) String lng) throws IOException {
         StringBuilder resultData = new StringBuilder();
         StringBuilder https = new StringBuilder("http://restapi.amap.com/v3/geocode/regeo?key=");
 //经纬度地址
+
+        String amapKey="c2b28fbb3b43b8f57ee0b78f229752af";
         StringBuilder localhost = new StringBuilder("&location="+lng+","+lat);
-        StringBuilder httpsTail = new StringBuilder("&poitype=&radius=300&extensions=base&batch=false");
-        String url = https.append(key).append(localhost).append(httpsTail).toString();
+        StringBuilder httpsTail = new StringBuilder("&poitype=&radius=&extensions=base&batch=true");
+        String url = https.append(amapKey).append(localhost).append(httpsTail).toString();
         //拼接出来的地址
         //System.out.println(https1.append(key).append(localhost1).append(httpsTail).toString());
         // String url ="http://restapi.amap.com/v3/geocode/regeo?key=自己申请的key&location=116.310003,39.991957&poitype=&radius=&extensions=base&batch=true&roadlevel=";
@@ -86,6 +86,7 @@ public class CommonController {
                 br.close();
             }
         }
+        System.out.println(resultData);
         if (resultData.toString().indexOf("regeocodes") == 0) {
             return null;
         }
