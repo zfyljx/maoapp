@@ -12,6 +12,8 @@ package com.hxq.maoapp.repository;
 
 import com.hxq.maoapp.entity.Share;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,5 +30,11 @@ import java.util.List;
 public interface ShareRepository extends JpaRepository<Share,Long> {
 
     List<Share> findAllByUserId(Long userId);
+
+//    @Query(value = "select id,user_id,user_name,message,address,creat_time,image_one_url,image_two_url,image_three_url from share  s where s.message like '%:mea%' or s.address like '%:mea%' or s.user_name like '%:mea%'")
+//    List<Share> findAllByMessageOrAddressLike(@Param("mea")String mea);
+
+    @Query(value = "select * from share AS s where s.message like %:msa% or s.address like %:msa% or s.user_name like %:msa%",nativeQuery = true)
+    List<Share> findAllByMessageLike(@Param("msa") String msa);
 }
 

@@ -20,14 +20,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
+ *@RequestParam("message")String message,
  *
- * @author hxq
+ * @author jmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
  * @create 2020/4/6
  * @since 1.0.0
  */
@@ -53,11 +55,11 @@ public class ShareController {
         share.setAddress(address);
         share.setUserName(userName);
         share.setUserId(userId);
-        share.setImageOneUrl(imageOne);
+        share.setImageOne(imageOne);
         share.setMessage(message);
-        share.setImageTwoUrl(imageTwo);
-        share.setImageThreeUrl(imageThree);
-        share.setCreatTime(new Date());
+        share.setImageTwo(imageTwo);
+        share.setImageThree(imageThree);
+        share.setCreateTime(getStringDate());
         Share userInfo=shareRepostory.save(share);
         if (userInfo != null){
             res.setMessage("发布成功");
@@ -71,7 +73,7 @@ public class ShareController {
     }
 
 
-    @GetMapping("/postandroidallsharebyone")
+    @GetMapping("/getandroidmineshares")
     @ResponseBody
     public Result findAllShareByUserId(@RequestParam("userId")Long userId){
         Result res=new Result();
@@ -89,7 +91,7 @@ public class ShareController {
         return res;
     }
 
-    @GetMapping("/postandroidallshares")
+    @GetMapping("/getandroidshares")
     @ResponseBody
     public Result findAllShare(){
         Result res=new Result();
@@ -107,5 +109,30 @@ public class ShareController {
         }
         return res;
     }
+
+    @GetMapping("/getandroidqueryshares")
+    @ResponseBody
+    public Result findAllShareByQuery(@RequestParam("query")String query){
+        Result res=new Result();
+        List<Share> shares=shareRepostory.findAllByMessageLike(query);
+        if (shares.size() > 0){
+            res.setMessage("查找发布成功");
+            res.setData(shares);
+            res.setStatus(200);
+
+        }else {
+            res.setMessage("查找发布无结果");
+            res.setData(shares);
+            res.setStatus(204);
+        }
+        return res;
+    }
+
+    public static String getStringDate() {
+          Date currentTime = new Date();
+           SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+          String dateString = formatter.format(currentTime);
+         return dateString;
+          }
 }
 

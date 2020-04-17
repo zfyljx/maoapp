@@ -14,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -35,20 +34,18 @@ public class Share {
     @Id
     @GeneratedValue
     private Long id;
-
-
     private Long userId;
     private String userName;
     private String message;
     private String address;
 
-    private String imageOneUrl;
+    private String imageOne;
 
-    private String imageTwoUrl;
+    private String imageTwo;
 
-    private String imageThreeUrl;
+    private String imageThree;
 
-    private Date creatTime;
+    private String createTime;
 
     public String getUserName() {
         return userName;
@@ -82,30 +79,6 @@ public class Share {
         this.address = address;
     }
 
-    public String getImageOneUrl() {
-        return imageOneUrl;
-    }
-
-    public void setImageOneUrl(String imageOneUrl) {
-        this.imageOneUrl = imageOneUrl;
-    }
-
-    public String getImageTwoUrl() {
-        return imageTwoUrl;
-    }
-
-    public void setImageTwoUrl(String imageTwoUrl) {
-        this.imageTwoUrl = imageTwoUrl;
-    }
-
-    public String getImageThreeUrl() {
-        return imageThreeUrl;
-    }
-
-    public void setImageThreeUrl(String imageThreeUrl) {
-        this.imageThreeUrl = imageThreeUrl;
-    }
-
     public Long getUserId() {
         return userId;
     }
@@ -114,12 +87,36 @@ public class Share {
         this.userId = userId;
     }
 
-    public Date getCreatTime() {
-        return creatTime;
+    public String getImageOne() {
+        return imageOne;
     }
 
-    public void setCreatTime(Date creatTime) {
-        this.creatTime = creatTime;
+    public void setImageOne(String imageOne) {
+        this.imageOne = imageOne;
+    }
+
+    public String getImageTwo() {
+        return imageTwo;
+    }
+
+    public void setImageTwo(String imageTwo) {
+        this.imageTwo = imageTwo;
+    }
+
+    public String getImageThree() {
+        return imageThree;
+    }
+
+    public void setImageThree(String imageThree) {
+        this.imageThree = imageThree;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     @Override
@@ -130,10 +127,10 @@ public class Share {
                 ", userName='" + userName + '\'' +
                 ", message='" + message + '\'' +
                 ", address='" + address + '\'' +
-                ", imageOneUrl='" + imageOneUrl + '\'' +
-                ", imageTwoUrl='" + imageTwoUrl + '\'' +
-                ", imageThreeUrl='" + imageThreeUrl + '\'' +
-                ", creatTime=" + creatTime +
+                ", imageOne='" + imageOne + '\'' +
+                ", imageTwo='" + imageTwo + '\'' +
+                ", imageThree='" + imageThree + '\'' +
+                ", createTime=" + createTime +
                 '}';
     }
 }
