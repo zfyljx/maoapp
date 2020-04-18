@@ -28,13 +28,13 @@ import java.util.List;
  */
 @Repository
 public interface ShareRepository extends JpaRepository<Share,Long> {
-
-    List<Share> findAllByUserId(Long userId);
+    @Query(value = "select * from share AS s where s.user_id=:uid  ORDER BY s.id DESC ",nativeQuery = true)
+    List<Share> findAllByUserId(@Param("uid")Long userId);
 
 //    @Query(value = "select id,user_id,user_name,message,address,creat_time,image_one_url,image_two_url,image_three_url from share  s where s.message like '%:mea%' or s.address like '%:mea%' or s.user_name like '%:mea%'")
 //    List<Share> findAllByMessageOrAddressLike(@Param("mea")String mea);
 
-    @Query(value = "select * from share AS s where s.message like %:msa% or s.address like %:msa% or s.user_name like %:msa%",nativeQuery = true)
+    @Query(value = "select * from share AS s where s.message like %:msa% or s.address like %:msa% or s.user_name like %:msa%  ORDER BY s.id DESC ",nativeQuery = true)
     List<Share> findAllByMessageLike(@Param("msa") String msa);
 }
 

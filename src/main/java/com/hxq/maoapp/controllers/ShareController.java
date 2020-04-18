@@ -14,6 +14,7 @@ import com.hxq.maoapp.entity.Share;
 import com.hxq.maoapp.repository.ShareRepository;
 import com.hxq.maoapp.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -96,7 +97,8 @@ public class ShareController {
     public Result findAllShare(){
         Result res=new Result();
         //TODO
-        List<Share> shares=shareRepostory.findAll();
+
+        List<Share> shares=shareRepostory.findAll(Sort.by(Sort.Direction.DESC,"id"));
         if (shares.size() > 0){
             res.setMessage("查找所有发布成功");
             res.setData(shares);
