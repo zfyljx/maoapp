@@ -44,7 +44,7 @@ public class ShareController {
 
     @PostMapping("/postandroidsaveshare")
     @ResponseBody
-    public Result saveShare(@RequestParam("id")Long userId,
+    public Result saveShare(@RequestParam("userId")Long userId,
                             @RequestParam("userName")String userName,
                            @RequestParam("message")String message,
                            @RequestParam("address")String address,
