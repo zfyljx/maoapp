@@ -45,6 +45,16 @@ public class User {
 
     private String description;
 
+    private String userImage;
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
     public Long getId() {
         return id;
     }
@@ -97,10 +107,12 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", userName='" + userName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", passWord='" + password + '\'' +
+                ", password='" + password + '\'' +
                 ", gender=" + gender +
                 ", description='" + description + '\'' +
+                ", userImage='" + userImage + '\'' +
                 '}';
     }
 }

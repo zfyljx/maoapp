@@ -36,5 +36,13 @@ public interface ShareRepository extends JpaRepository<Share,Long> {
 
     @Query(value = "select * from share AS s where s.message like %:msa% or s.address like %:msa% or s.user_name like %:msa%  ORDER BY s.id DESC ",nativeQuery = true)
     List<Share> findAllByMessageLike(@Param("msa") String msa);
+
+    @Query(value = "select * from share AS s where s.address like %:msa% ORDER BY s.id DESC ",nativeQuery = true)
+    List<Share> findAllByAddressLike(@Param("msa")String msa);
+
+    @Query(value = "select * from share AS s where s.user_name like %:msa%  ORDER BY s.id DESC ",nativeQuery = true)
+    List<Share> findAllByUserNameLike(@Param("msa")String msa);
+
+
 }
 

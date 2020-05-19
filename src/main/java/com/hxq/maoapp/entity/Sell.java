@@ -43,6 +43,15 @@ public class Sell {
     private String imageOne;
     private String imageTwo;
     private String imageThree;
+    private Integer classification;
+
+    public Integer getClassification() {
+        return classification;
+    }
+
+    public void setClassification(Integer classification) {
+        this.classification = classification;
+    }
 
     public Long getId() {
         return id;
@@ -173,6 +182,7 @@ public class Sell {
                 ", imageOne='" + imageOne + '\'' +
                 ", imageTwo='" + imageTwo + '\'' +
                 ", imageThree='" + imageThree + '\'' +
+                ", classification=" + classification +
                 '}';
     }
 }

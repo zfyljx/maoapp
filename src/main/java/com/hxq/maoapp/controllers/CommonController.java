@@ -10,12 +10,15 @@
  */
 package com.hxq.maoapp.controllers;
 
+import com.hxq.maoapp.entity.Sell;
 import com.hxq.maoapp.utils.Result;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,6 +28,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -116,6 +120,33 @@ public class CommonController {
 
         return new Result(200,"获取位置成功",object);
 
+    }
+
+
+    @RequestMapping(value = "/pppp")
+    public String fun(Model model){
+        ArrayList<Sell> sells = new ArrayList<Sell>();
+        Sell sell=new Sell();
+        Sell sell1=new Sell();
+        sell.setName("皇家幼年猫粮");
+        sell.setIntroduction("皇家幼年猫粮适合1-6个月小猫");
+        sell.setDescription("5000g;保质期12个月；适合11-6个月的猫咪食用；顺毛发；发腮");
+        sell.setMonthSell(23);
+        sell.setPrice(55.5f);
+        sell1.setName("皇家成年猫粮");
+        sell1.setIntroduction("皇家幼年猫粮适合大于6个月小猫");
+        sell1.setDescription("5000g;保质期12个月；适合大于的猫咪食用；顺毛发；发腮；增肥");
+        sell1.setMonthSell(23);
+        sell1.setPrice(55.5f);
+        sells.add(sell);
+        sells.add(sell1);
+        model.addAttribute("emps",sells);
+        return "redirect:/pmain.html";
+    }
+
+    @RequestMapping(value = "/add")
+    public String fun1111(Model model){
+        return "redirect:/add.html";
     }
 }
 

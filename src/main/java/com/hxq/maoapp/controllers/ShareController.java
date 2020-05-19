@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -50,7 +51,9 @@ public class ShareController {
                            @RequestParam("address")String address,
                            @RequestParam("imageOne")String imageOne,
                            @RequestParam("imageTwo")String imageTwo,
-                           @RequestParam("imageThree")String imageThree){
+                           @RequestParam("imageThree")String imageThree,
+                            @RequestParam("classification")Integer classification,
+                            @RequestParam("userImage")String userImage){
         Result res=new Result();
         Share share=new Share();
         share.setAddress(address);
@@ -61,6 +64,8 @@ public class ShareController {
         share.setImageTwo(imageTwo);
         share.setImageThree(imageThree);
         share.setCreateTime(getStringDate());
+        share.setClassification(classification);
+        share.setUserImage(userImage);
         Share userInfo=shareRepostory.save(share);
         if (userInfo != null){
             res.setMessage("发布成功");
@@ -86,6 +91,24 @@ public class ShareController {
 
         }else {
             res.setMessage("查找个人发布无结果");
+            res.setData(shares);
+            res.setStatus(204);
+        }
+        return res;
+    }
+
+    @GetMapping("/getandroidusershares")
+    @ResponseBody
+    public Result findShareByUserId(@RequestParam("userId")Long userId){
+        Result res=new Result();
+        List<Share> shares=shareRepostory.findAllByUserId(userId);
+        if (shares.size() > 0){
+            res.setMessage("查找用户发布成功");
+            res.setData(shares);
+            res.setStatus(200);
+
+        }else {
+            res.setMessage("查找用户发布无结果");
             res.setData(shares);
             res.setStatus(204);
         }
@@ -136,5 +159,29 @@ public class ShareController {
           String dateString = formatter.format(currentTime);
          return dateString;
           }
+
+
+    @PostMapping("/postandroidsharestatus")
+    @ResponseBody
+    public Result updateShare(@RequestParam("id")Long id
+                                ){
+        Result res = new Result();
+        Optional<Share> share=shareRepostory.findById(id);
+        if (share.isPresent()){
+            Share share1=share.get();
+            share1.setStatus(1);
+           Share share2=shareRepostory.save(share1);
+            if (share2 != null){
+                res.setMessage("认领确认成功");
+                res.setStatus(200);
+
+            }else {
+                res.setMessage("认领确认失败");
+                res.setStatus(204);
+
+            }
+        }
+        return res;
+    }
 }
 

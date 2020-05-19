@@ -47,6 +47,36 @@ public class Share {
 
     private String createTime;
 
+    private Integer classification;
+
+    private Integer status;
+
+    private String userImage;
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getClassification() {
+        return classification;
+    }
+
+    public void setClassification(Integer classification) {
+        this.classification = classification;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -130,7 +160,10 @@ public class Share {
                 ", imageOne='" + imageOne + '\'' +
                 ", imageTwo='" + imageTwo + '\'' +
                 ", imageThree='" + imageThree + '\'' +
-                ", createTime=" + createTime +
+                ", createTime='" + createTime + '\'' +
+                ", classification=" + classification +
+                ", status=" + status +
+                ", userImage='" + userImage + '\'' +
                 '}';
     }
 }

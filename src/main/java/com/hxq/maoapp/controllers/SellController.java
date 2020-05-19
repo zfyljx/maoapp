@@ -94,6 +94,24 @@ public class SellController {
         return res;
     }
 
+    @GetMapping("/getandroidquerysells")
+    @ResponseBody
+    public Result findAllSellsQuery(@RequestParam("query")String query){
+        Result res=new Result();
+        List<Sell> sells=sellRepository.findAllByMessageLike(query);
+        if (sells.size() > 0){
+            res.setMessage("查找店家商品成功");
+            res.setData(sells);
+            res.setStatus(200);
+
+        }else {
+            res.setMessage("查找店家商品无结果");
+
+            res.setStatus(204);
+        }
+        return res;
+    }
+
 
 }
 
